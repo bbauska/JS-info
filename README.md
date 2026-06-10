@@ -21,7 +21,7 @@ Modern tools make the transpilation very fast and transparent, actually allowing
 
 ### Examples of such languages:
 
-### CoffeeScript
+### <a href="https://coffeescript.org/">CoffeeScript</a>
 is “syntactic sugar” for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
 ### TypeScript
 is concentrated on adding “strict data typing” to simplify the development and support of complex systems. It is developed by Microsoft.
