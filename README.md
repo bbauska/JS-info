@@ -34,6 +34,84 @@ is a Python transpiler to JavaScript that enables the writing of applications in
 ### <a href="https://kotlinlang.org/docs/reference/js-overview.html">Kotlin</a>
 is a modern, concise and safe programming language that can target the browser or Node.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+IDE
+The term IDE (Integrated Development Environment) refers to a powerful editor with many features that usually operates on a “whole project.” As the name suggests, it’s not just an editor, but a full-scale “development environment.”
+
+An IDE loads the project (which can be many files), allows navigation between files, provides autocompletion based on the whole project (not just the open file), and integrates with a version management system (like git), a testing environment, and other “project-level” stuff.
+
+If you haven’t selected an IDE yet, consider the following options:
+
+<a href="https://code.visualstudio.com/">Visual Studio Code (cross-platform, free).</a>
+<a href="https://www.jetbrains.com/webstorm/">WebStorm (cross-platform, paid).</a>
+For Windows, there’s also “Visual Studio”, not to be confused with “Visual Studio Code”. “Visual Studio” is a 
+paid and mighty Windows-only editor, well-suited for the .NET platform. It’s also good at JavaScript. There’s 
+also a free version <a href="https://www.visualstudio.com/vs/community/">Visual Studio Community</a>.
+
+Many IDEs are paid, but have a trial period. Their cost is usually negligible compared to a qualified developer’s salary, so just choose the best one for you.
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+## Lightweight editors
+“Lightweight editors” are not as powerful as IDEs, but they’re fast, elegant and simple.
+
+They are mainly used to open and edit a file instantly.
+
+The main difference between a “lightweight editor” and an “IDE” is that an IDE works on a project-level, so it loads much more data on start, analyzes the project structure if needed and so on. A lightweight editor is much faster if we need only one file.
+
+In practice, lightweight editors may have a lot of plugins including directory-level syntax analyzers and autocompleters, so there’s no strict border between a lightweight editor and an IDE.
+
+There are many options, for instance:
+
+<a href="https://www.sublimetext.com/">Sublime Text (cross-platform, shareware).</a>
+<a href="https://notepad-plus-plus.org/">Notepad++ (Windows, free).</a>
+<a href="https://www.vim.org/">Vim</a> and <a href="https://www.gnu.org/software/emacs/">Emacs</a> are also cool if you know how to use them.
+The author’s personal opinion:
+
+I’d use <a href="https://code.visualstudio.com/">Visual Studio Code</a> if I develop mostly frontend.
+Otherwise, if it’s mostly another language/platform and partially frontend, then consider other editors, 
+such as XCode (Mac), Visual Studio (Windows) or Jetbrains family (Webstorm, PHPStorm, RubyMine etc, 
+depending on the language).
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+## Developer console
+Code is prone to errors. You will quite likely make errors… Oh, what am I talking about? You are 
+absolutely going to make errors, at least if you’re a human, not a robot.
+
+But in the browser, users don’t see errors by default. So, if something goes wrong in the script, we 
+won’t see what’s broken and can’t fix it.
+
+To see errors and get a lot of other useful information about scripts, “developer tools” have been 
+embedded in browsers.
+
+Most developers lean towards Chrome or Firefox for development because those browsers have the best 
+developer tools. Other browsers also provide developer tools, sometimes with special features, but are 
+usually playing “catch-up” to Chrome or Firefox. So most developers have a “favorite” browser and switch 
+to others if a problem is browser-specific.
+
+Developer tools are potent; they have many features. To start, we’ll learn how to open them, look at errors, and 
+run JavaScript commands.
+
+### Google Chrome
+Open the page <a href="https://javascript.info/article/devtools/bug.html">bug.html</a>.
+
+There’s an error in the JavaScript code on it. It’s hidden from a regular visitor’s eyes, so let’s open developer tools to see it.
+
+Press F12 or, if you’re on Mac, then Cmd+Opt+J.
+
+The developer tools will open on the Console tab by default.
+
+It looks somewhat like this:
+
+<!-- image goes here -->
+
+### Summary
+Developer tools allow us to see errors, run commands, examine variables, and much more.
+They can be opened with F12 for most browsers on Windows. Chrome for Mac needs Cmd+Opt+J, Safari: Cmd+Opt+C (need to enable first).
+Now we have the environment ready. In the next section, we’ll get down to JavaScript.
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
 ## IIFE
 In the past, as there was only var, and it has no block-level visibility, programmers invented a way to emulate it. 
 What they did was called “immediately-invoked function expressions” (abbreviated as IIFE).
