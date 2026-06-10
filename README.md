@@ -823,14 +823,11 @@ The full page:
 <!DOCTYPE html>
 <html>
 <body>
-
   <script>
     'use strict';
-
     let name = prompt("What is your name?", "");
     alert(name);
   </script>
-
 </body>
 </html>
 ```
@@ -838,7 +835,8 @@ The full page:
 ## Type Conversions
 Most of the time, operators and functions automatically convert the values given to them to the right type.
 
-For example, alert automatically converts any value to a string to show it. Mathematical operations convert values to numbers.
+For example, alert automatically converts any value to a string to show it. Mathematical operations 
+convert values to numbers.
 
 There are also cases when we need to explicitly convert a value to the expected type.
 
@@ -889,9 +887,7 @@ alert(age); // NaN, conversion failed
 | undefined |      NaN |
 | null	    |        0 |
 | true and false | 1 and 0 |
-|string          | Whitespaces (includes spaces, tabs \t, newlines \n etc.) from the start and end are 
-                   removed. If the remaining string is empty, the result is 0. Otherwise, the number 
-                   is “read” from the string. An error gives NaN. |
+|string          | Whitespaces (includes spaces, tabs \t, newlines \n etc.) from the start and end are removed. If the remaining string is empty, the result is 0. Otherwise, the number is “read” from the string. An error gives NaN. |
 
 Examples:
 ```
