@@ -23,15 +23,15 @@ Modern tools make the transpilation very fast and transparent, actually allowing
 
 ### <a href="https://coffeescript.org/">CoffeeScript</a>
 is “syntactic sugar” for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
-### TypeScript
+### <a href="https://www.typescriptlang.org/">TypeScript</a>
 is concentrated on adding “strict data typing” to simplify the development and support of complex systems. It is developed by Microsoft.
-### Flow
+### <a href="https://flow.org/">Flow</a>
 also adds data typing, but in a different way. Developed by Facebook.
-### Dart
+### <a href="https://www.dartlang.org/">Dart</a>
 is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
-### Brython
+### <a href="https://brython.info/">Brython</a>
 is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
-### Kotlin
+### <a href="https://kotlinlang.org/docs/reference/js-overview.html">Kotlin</a>
 is a modern, concise and safe programming language that can target the browser or Node.
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 ## IIFE
