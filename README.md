@@ -3845,19 +3845,23 @@ Let’s formulate the key differences between Function Declarations and Expressi
 First, the syntax: how to differentiate between them in the code.
 
 Function Declaration: a function, declared as a separate statement, in the main code flow:
+
 ```
 // Function Declaration
 function sum(a, b) {
   return a + b;
 }
 ```
+
 Function Expression: a function, created inside an expression or inside another syntax construct. Here, the function is created on the right side of the “assignment expression” =:
+
 ```
 // Function Expression
 let sum = function(a, b) {
   return a + b;
 };
 ```
+
 The more subtle difference is when a function is created by the JavaScript engine.
 
 A Function Expression is created when the execution reaches it and is usable only from that moment.
@@ -3897,40 +3901,36 @@ Function Expressions are created when the execution reaches them. That would hap
 
 Another special feature of Function Declarations is their block scope.
 
-In strict mode, when a Function Declaration is within a code block, it’s visible everywhere inside that block. But not outside of it.
+In strict mode, when a Function Declaration is within a code block, it’s visible everywhere 
+inside that block. But not outside of it.
 
-For instance, let’s imagine that we need to declare a function welcome() depending on the age variable that we get during runtime. And then we plan to use it some time later.
+For instance, let’s imagine that we need to declare a function welcome() depending on the age 
+variable that we get during runtime. And then we plan to use it some time later.
 
 If we use Function Declaration, it won’t work as intended:
 
 ```
 let age = prompt("What is your age?", 18);
-
 // conditionally declare a function
 if (age < 18) {
-
   function welcome() {
     alert("Hello!");
   }
-
 } else {
-
   function welcome() {
     alert("Greetings!");
   }
-
 }
-
 // ...use it later
-```
 welcome(); // Error: welcome is not defined
 ```
+
 That’s because a Function Declaration is only visible inside the code block in which it resides.
 
 Here’s another example:
+
 ```
 let age = 16; // take 16 as an example
-
 if (age < 18) {
   welcome();               // \   (runs)
                            //  |
@@ -3939,17 +3939,13 @@ if (age < 18) {
   }                        //  |  everywhere in the block where it's declared
                            //  |
   welcome();               // /   (runs)
-
 } else {
-
   function welcome() {
     alert("Greetings!");
   }
 }
-
 // Here we're out of curly braces,
 // so we can not see Function Declarations made inside of them.
-
 welcome(); // Error: welcome is not defined
 ```
 
@@ -3961,23 +3957,16 @@ This code works as intended:
 
 ```
 let age = prompt("What is your age?", 18);
-
 let welcome;
-
 if (age < 18) {
-
   welcome = function() {
     alert("Hello!");
   };
-
 } else {
-
   welcome = function() {
     alert("Greetings!");
   };
-
 }
-
 welcome(); // ok now
 ```
 
@@ -3985,11 +3974,9 @@ Or we could simplify it even further using a question mark operator ?:
 
 ```
 let age = prompt("What is your age?", 18);
-
 let welcome = (age < 18) ?
   function() { alert("Hello!"); } :
   function() { alert("Greetings!"); };
-
 welcome(); // ok now
 ```
 
