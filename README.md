@@ -3853,7 +3853,8 @@ function sum(a, b) {
 }
 ```
 
-Function Expression: a function, created inside an expression or inside another syntax construct. Here, the function is created on the right side of the “assignment expression” =:
+Function Expression: a function, created inside an expression or inside another syntax construct. 
+Here, the function is created on the right side of the “assignment expression” =:
 
 ```
 // Function Expression
@@ -3866,7 +3867,8 @@ The more subtle difference is when a function is created by the JavaScript engin
 
 A Function Expression is created when the execution reaches it and is usable only from that moment.
 
-Once the execution flow passes to the right side of the assignment let sum = function… – here we go, the function is created and can be used (assigned, called, etc. ) from now on.
+Once the execution flow passes to the right side of the assignment let sum = function… – here we go, 
+the function is created and can be used (assigned, called, etc. ) from now on.
 
 Function Declarations are different.
 
@@ -3874,7 +3876,8 @@ A Function Declaration can be called earlier than it is defined.
 
 For example, a global Function Declaration is visible in the whole script, no matter where it is.
 
-That’s due to internal algorithms. When JavaScript prepares to run the script, it first looks for global Function Declarations in it and creates the functions. We can think of it as an “initialization stage”.
+That’s due to internal algorithms. When JavaScript prepares to run the script, it first looks for global 
+Function Declarations in it and creates the functions. We can think of it as an “initialization stage”.
 
 And after all Function Declarations are processed, the code is executed. So it has access to these functions.
 
@@ -3951,7 +3954,8 @@ welcome(); // Error: welcome is not defined
 
 What can we do to make welcome visible outside of if?
 
-The correct approach would be to use a Function Expression and assign welcome to the variable that is declared outside of if and has the proper visibility.
+The correct approach would be to use a Function Expression and assign welcome to the variable that is 
+declared outside of if and has the proper visibility.
 
 This code works as intended:
 
@@ -3998,13 +4002,435 @@ let f = function(…) {…};. Function Declarations are more “eye-catching”.
  - Function Declarations are processed before the code block is executed. They are visible everywhere in the block.
  - Function Expressions are created when the execution flow reaches them.
 
-In most cases when we need to declare a function, a Function Declaration is preferable, because it is visible prior to the declaration itself. That gives us more flexibility in code organization, and is usually more readable.
+In most cases when we need to declare a function, a Function Declaration is preferable, because it is 
+visible prior to the declaration itself. That gives us more flexibility in code organization, and is usually more readable.
 
-So we should use a Function Expression only when a Function Declaration is not fit for the task. We’ve seen a couple of examples of that in this chapter, and will see more in the future.
+So we should use a Function Expression only when a Function Declaration is not fit for the task. We’ve 
+seen a couple of examples of that in this chapter, and will see more in the future.
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+## Arrow functions, the basics
+There’s another very simple and concise syntax for creating functions, that’s often better than Function Expressions.
+
+It’s called “arrow functions”, because it looks like this:
+```
+let func = (arg1, arg2, ..., argN) => expression;
+```
+This creates a function func that accepts arguments arg1..argN, then evaluates the expression on the 
+right side with their use and returns its result.
+
+In other words, it’s the shorter version of:
+```
+let func = function(arg1, arg2, ..., argN) {
+  return expression;
+};
+```
+Let’s see a concrete example:
+```
+let sum = (a, b) => a + b;
+/* This arrow function is a shorter form of:
+let sum = function(a, b) {
+  return a + b;
+};
+*/
+alert( sum(1, 2) ); // 3
+```
+As you can see, (a, b) => a + b means a function that accepts two arguments named a and b. Upon the execution, it evaluates the expression a + b and returns the result.
+
+If we have only one argument, then parentheses around parameters can be omitted, making that even shorter.
+
+For example:
+```
+let double = n => n * 2;
+// roughly the same as: let double = function(n) { return n * 2 }
+
+alert( double(3) ); // 6
+```
+
+If there are no arguments, parentheses are empty, but they must be present:
+```
+let sayHi = () => alert("Hello!");
+
+sayHi();
+```
+Arrow functions can be used in the same way as Function Expressions.
+
+For instance, to dynamically create a function:
+```
+let age = prompt("What is your age?", 18);
+
+let welcome = (age < 18) ?
+  () => alert('Hello!') :
+  () => alert("Greetings!");
+
+welcome()
+```
+
+Arrow functions may appear unfamiliar and not very readable at first, but that quickly changes as the eyes get used to the structure.
+
+They are very convenient for simple one-line actions, when we’re just too lazy to write many words.
+
+### Multiline arrow functions
+The arrow functions that we’ve seen so far were very simple. They took arguments from the left of =>, evaluated and returned the right-side expression with them.
+
+Sometimes we need a more complex function, with multiple expressions and statements. In that case, we can enclose them in curly braces. The major difference is that curly braces require a return within them to return a value (just like a regular function does).
+
+Like this:
+```
+let sum = (a, b) => {  // the curly brace opens a multiline function
+  let result = a + b;
+  return result; // if we use curly braces, then we need an explicit "return"
+};
+
+alert( sum(1, 2) ); // 3
+```
+More to come
+Here we praised arrow functions for brevity. But that’s not all!
+
+Arrow functions have other interesting features.
+
+To study them in-depth, we first need to get to know some other aspects of JavaScript, so we’ll return to arrow functions later in the chapter Arrow functions revisited.
+
+For now, we can already use arrow functions for one-line actions and callbacks.
+
+### Summary
+Arrow functions are handy for simple actions, especially for one-liners. They come in two flavors:
+
+1. Without curly braces: (...args) => expression – the right side is an expression: the function evaluates it and returns the result. Parentheses can be omitted, if there’s only a single argument, e.g. n => n*2.
+2. With curly braces: (...args) => { body } – brackets allow us to write multiple statements inside the function, but we need an explicit return to return something.
+
+#### Rewrite with arrow functions
+
+Replace Function Expressions with arrow functions in the code below:
+
+```
+function ask(question, yes, no) {
+  if (confirm(question)) yes();
+  else no();
+}
+
+ask(
+  "Do you agree?",
+  function() { alert("You agreed."); },
+  function() { alert("You canceled the execution."); }
+);
+```
+
+solution
+
+```
+function ask(question, yes, no) {
+  if (confirm(question)) yes();
+  else no();
+}
+
+ask(
+  "Do you agree?",
+  () => alert("You agreed."),
+  () => alert("You canceled the execution.")
+);
+```
+Looks short and clean, right?
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+## JavaScript specials
+This chapter briefly recaps the features of JavaScript that we’ve learned by now, paying special attention to subtle moments.
+
+### Code structure
+Statements are delimited with a semicolon:
+```
+alert('Hello'); alert('World');
+```
+Usually, a line-break is also treated as a delimiter, so that would also work:
+```
+alert('Hello')
+alert('World')
+```
+That’s called “automatic semicolon insertion”. Sometimes it doesn’t work, for instance:
+```
+alert("There will be an error after this message")
+
+[1, 2].forEach(alert)
+```
+Most codestyle guides agree that we should put a semicolon after each statement.
+
+Semicolons are not required after code blocks {...} and syntax constructs with them like loops:
+```
+function f() {
+  // no semicolon needed after function declaration
+}
+
+for(;;) {
+  // no semicolon needed after the loop
+}
+```
+…But even if we can put an “extra” semicolon somewhere, that’s not an error. It will be ignored.
+
+More in: Code structure.
+
+### Strict mode
+To fully enable all features of modern JavaScript, we should start scripts with "use strict".
+```
+'use strict';
+
+...
+```
+The directive must be at the top of a script or at the beginning of a function body.
+
+Without "use strict", everything still works, but some features behave in the old-fashioned,
+ “compatible” way. We’d generally prefer the modern behavior.
+
+Some modern features of the language (like classes that we’ll study in the future) enable strict mode implicitly.
+
+More in: The modern mode, "use strict".
+
+### Variables
+Can be declared using:
+
+ - let
+ - const (constant, can’t be changed)
+ - var (old-style, will see later)
+
+A variable name can include:
+
+ - Letters and digits, but the first character may not be a digit.
+ - Characters $ and _ are normal, on par with letters.
+ - Non-Latin alphabets and hieroglyphs are also allowed, but commonly not used.
+
+Variables are dynamically typed. They can store any value:
+```
+let x = 5;
+x = "John";
+```
+There are 8 data types:
+
+ - number for both floating-point and integer numbers,
+ - bigint for integer numbers of arbitrary length,
+ - string for strings,
+ - boolean for logical values: true/false,
+ - null – a type with a single value null, meaning “empty” or “does not exist”,
+ - undefined – a type with a single value undefined, meaning “not assigned”,
+ - object and symbol – for complex data structures and unique identifiers, we haven’t learnt them yet.
+
+The typeof operator returns the type for a value, with two exceptions:
+```
+typeof null == "object" // error in the language
+typeof function(){} == "function" // functions are treated specially
+```
+More in: Variables and Data types.
+
+### Interaction
+We’re using a browser as a working environment, so basic UI functions will be:
+
+prompt(question, [default])
+Ask a question, and return either what the visitor entered or null if they clicked “cancel”.
+confirm(question)
+Ask a question and suggest to choose between Ok and Cancel. The choice is returned as true/false.
+alert(message)
+Output a message.
+All these functions are modal, they pause the code execution and prevent the visitor from interacting with the page until they answer.
+
+For instance:
+```
+let userName = prompt("Your name?", "Alice");
+let isTeaWanted = confirm("Do you want some tea?");
+
+alert( "Visitor: " + userName ); // Alice
+alert( "Tea wanted: " + isTeaWanted ); // true
+```
+More in: Interaction: alert, prompt, confirm.
+
+### Operators
+JavaScript supports the following operators:
+
+#### Arithmetical
+Regular: * + - /, also % for the remainder and ** for power of a number.
+
+The binary plus + concatenates strings. And if any of the operands is a string, the other one is converted to string too:
+```
+alert( '1' + 2 ); // '12', string
+alert( 1 + '2' ); // '12', string
+```
+
+#### Assignments
+There is a simple assignment: a = b and combined ones like a *= 2.
+
+#### Bitwise
+	Bitwise operators work with 32-bit integers at the lowest, bit-level: see the docs when they are needed.
+
+#### Conditional
+The only operator with three parameters: cond ? resultA : resultB. If cond is truthy, returns resultA, otherwise resultB.
+
+#### Logical operators
+Logical AND && and OR || perform short-circuit evaluation and then return the value where it stopped (not necessary true/false). Logical NOT ! converts the operand to boolean type and returns the inverse value.
+
+#### Nullish coalescing operator
+The ?? operator provides a way to choose a defined value from a list of variables. The result of a ?? b is a unless it’s null/undefined, then b.
+
+#### Comparisons
+Equality check == for values of different types converts them to a number (except null and undefined that equal each other and nothing else), so these are equal:
+```
+alert( 0 == false ); // true
+alert( 0 == '' ); // true
+```
+Other comparisons convert to a number as well.
+
+The strict equality operator === doesn’t do the conversion: different types always mean different values for it.
+
+Values null and undefined are special: they equal == each other and don’t equal anything else.
+
+Greater/less comparisons compare strings character-by-character, other types are converted to a number.
+
+#### Other operators
+There are few others, like a comma operator.
+
+More in: Basic operators, maths, Comparisons, Logical operators, Nullish coalescing operator '??'.
+
+### Loops
+We covered 3 types of loops:
+```
+// 1
+while (condition) {
+  ...
+}
+
+// 2
+do {
+  ...
+} while (condition);
+
+// 3
+for(let i = 0; i < 10; i++) {
+  ...
+}
+```
+The variable declared in for(let...) loop is visible only inside the loop. But we can also omit let and reuse an existing variable.
+
+Directives break/continue allow to exit the whole loop/current iteration. Use labels to break nested loops.
+
+Details in: Loops: while and for.
+
+Later we’ll study more types of loops to deal with objects.
+
+### The “switch” construct
+The “switch” construct can replace multiple if checks. It uses === (strict equality) for comparisons.
+
+For instance:
+```
+let age = prompt('Your age?', 18);
+
+switch (age) {
+  case 18:
+    alert("Won't work"); // the result of prompt is a string, not a number
+    break;
+
+  case "18":
+    alert("This works!");
+    break;
+
+  default:
+    alert("Any value not equal to one above");
+}
+```
+Details in: The "switch" statement.
+
+### Functions
+We covered three ways to create a function in JavaScript:
+```
+Function Declaration: the function in the main code flow
+
+function sum(a, b) {
+  let result = a + b;
+
+  return result;
+}
+```
+
+Function Expression: the function in the context of an expression
+```
+let sum = function(a, b) {
+  let result = a + b;
+
+  return result;
+};
+```
+
+Arrow functions:
+```
+// expression on the right side
+let sum = (a, b) => a + b;
+
+// or multi-line syntax with { ... }, need return here:
+let sum = (a, b) => {
+  // ...
+  return a + b;
+}
+
+// without arguments
+let sayHi = () => alert("Hello");
+
+// with a single argument
+let double = n => n * 2;
+```
+ - Functions may have local variables: those declared inside its body or its parameter list. Such variables are only visible inside the function.
+ - Parameters can have default values: function sum(a = 1, b = 2) {...}.
+ - Functions always return something. If there’s no return statement, then the result is undefined.
+
+Details: see Functions, Arrow functions, the basics.
+
+More to come
+That was a brief list of JavaScript features. As of now we’ve studied only basics. Further in the tutorial you’ll find more specials and advanced features of JavaScript.
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+## Code quality
+This chapter explains coding practices that we’ll use further in the development.
+
+1. <a href="https://javascript.info/debugging-chrome">Debugging in the browser</a>
+2. <a href="https://javascript.info/coding-style">Coding Style</a>
+3. <a href="https://javascript.info/comments">Comments</a>
+4. <a href="https://javascript.info/ninja-code">Ninja code</a>
+5. <a href="https://javascript.info/testing-mocha">Automated testing with Mocha</a>
+6. <a href="https://javascript.info/polyfills">Polyfills and transpilers</a>
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+## Debugging in the browser
+Before writing more complex code, let’s talk about debugging.
+
+Debugging is the process of finding and fixing errors within a script. All modern browsers and most 
+other environments support debugging tools – a special UI in developer tools that makes debugging 
+much easier. It also allows to trace the code step by step to see what exactly is going on.
+
+We’ll be using Chrome here, because it has enough features, most other browsers have a similar process.
+
+### The “Sources” panel
+Your Chrome version may look a little bit different, but it still should be obvious what’s there.
+
+ - Open the example page in Chrome.
+ - Turn on developer tools with F12 (Mac: Cmd+Opt+I).
+ - Select the Sources panel.
+
+Here’s what you should see if you are doing it for the first time:
+
+
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
+
+
+
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+
+
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+
+
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+
+
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 ## IIFE
